@@ -36,3 +36,21 @@ SELECT * FROM PM.Projects WHERE Title like 'C%'
 SELECT * FROM PM.Projects WHERE Title like '%P'
 --%xx% starts with
 SELECT * FROM PM.Projects WHERE Title like '%DESK%'
+--LIKE _R%
+SELECT * FROM PM.Projects WHERE Title like '%_R%'
+SELECT * FROM PM.Projects WHERE Title like '%_R_%'
+SELECT * FROM PM.Projects WHERE InitialCost like '%_5%'
+--TOP
+SELECT TOP 3 * From PM.Projects
+SELECT TOP 2 PERCENT * From PM.Projects
+--ORDER BY
+SELECT TOP 3 * From PM.Projects
+SELECT * FROM PM.Projects ORDER BY StartDate;
+SELECT * FROM PM.Projects ORDER BY StartDate DESC;
+SELECT * FROM PM.Projects ORDER BY InitialCost, StartDate DESC;
+--GROUP BY
+SELECT Title,COUNT(*) FROM PM.Projects GROUP BY Title;
+SELECT ManagerId,COUNT(*) FROM PM.Projects GROUP BY ManagerId;
+SELECT ManagerId,COUNT(*) FROM PM.Projects WHERE Parked = 0 GROUP BY ManagerId HAVING COUNT(*) >= 2;
+
+
