@@ -52,5 +52,47 @@ SELECT * FROM PM.Projects ORDER BY InitialCost, StartDate DESC;
 SELECT Title,COUNT(*) FROM PM.Projects GROUP BY Title;
 SELECT ManagerId,COUNT(*) FROM PM.Projects GROUP BY ManagerId;
 SELECT ManagerId,COUNT(*) FROM PM.Projects WHERE Parked = 0 GROUP BY ManagerId HAVING COUNT(*) >= 2;
+--DISTINCT
+SELECT DISTINCT Title FROM PM.Projects;
+SELECT DISTINCT InitialCost FROM PM.Projects;
+--tables JOIN
+SELECT * FROM PM.Projects;
+--PRJNO,TITLE, MANAGER_EMAIL
+SELECT * FROM PM.Projects,PM.Managers;
+SELECT PRJNO, Title, Email FROM PM.Projects,PM.Managers;--cartidisn product
+SELECT PRJNO, Title, Email,PM.Managers.Id,PM.Projects.ManagerId FROM PM.Projects, PM.Managers 
+WHERE PM.Projects.ManagerId = PM.Managers.Id;
 
+--INNER JOIN match in two tables
+SELECT PRJNO AS N'رقم المشروع'
+, Title AS N'عنوان المشروع'
+, Email AS N'البريد الالكتروني لمدير المشروع'
+FROM PM.Projects AS P INNER JOIN PM.Managers AS M 
+ON P.ManagerId = M.Id;
+--LEFT JOIN all rows from left table even no match
+SELECT * FROM PM.Projects;
+SELECT * FROM PM.Companies;
+
+SELECT P.PRJNO 
+, P.Title 
+, C.CompanyName
+FROM PM.Projects AS P LEFT JOIN PM.Companies AS C 
+ON P.CRNNO = C.CRNNO;
+SELECT P.PRJNO 
+, P.Title 
+,C.CRNNO
+, C.CompanyName
+FROM  PM.Companies AS C  LEFT JOIN PM.Projects AS P 
+ON P.CRNNO = C.CRNNO;
+--RIGHT JOIN all rows from left table even no match
+SELECT P.PRJNO 
+, P.Title 
+, C.CompanyName
+FROM PM.Projects AS P RIGHT JOIN PM.Companies AS C 
+ON P.CRNNO = C.CRNNO;
+SELECT P.PRJNO 
+, P.Title 
+, C.CompanyName
+FROM PM.Projects AS P FULL JOIN PM.Companies AS C 
+ON P.CRNNO = C.CRNNO;
 
